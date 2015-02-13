@@ -1,12 +1,12 @@
 
-public class Pawn {
+public class Pawn implements Piece {
 	//Store the positions
 	int x, y;
 	//Color is 1 for white, 2 for black
 	boolean color;
 	
 	//Test if the pawn can move to that position
-	private boolean canMove(int x, int y){
+	public boolean canMove(int x, int y){
 		if(x > 8 || x < 1 || y > 8 || y < 1)
 			return false;
 		// If pawn is white
@@ -33,7 +33,7 @@ public class Pawn {
 		}
 	}
 	
-	private void move(int x, int y){
+	public void move(int x, int y){
 		
 	
 	}
