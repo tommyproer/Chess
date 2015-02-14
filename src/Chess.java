@@ -8,6 +8,7 @@ public class Chess{
 	private static Board board = new Board(b);
 	private static JFrame window;
 	private static boolean whiteMove;
+	public static int x1,x2,y1,y2;
 	
 	private static String getInput()
 	{
@@ -79,14 +80,39 @@ public class Chess{
 			System.out.println("Invalid positon");
 			return false;
 		}
-		if(b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))] == null){
-			System.out.println("No piece located at " + input.charAt(0) + input.charAt(1));
-			return false;
-		}
 		return true;
 	}
 	
+	private static void firstInput(){
+		// Check if first input is valid
+		System.out.print("Type the position of the piece to move");
+    	if(whiteMove)
+    		System.out.print("(white to move): ");
+    	else
+    		System.out.print("(black to move): ");
+    	
+    	String input = getInput();
+    	while(!checkInput(input, whiteMove)){
+	    	input = getInput();
+    	}
+    	
+    	// Convert position to coordinates in array
+    	x1 = convertToInt(input.charAt(0));
+    	y1 = 8 - Character.getNumericValue(input.charAt(1));
+	}
 	
+	private static void secondInput(){
+		// Check if second input is valid
+		System.out.print("Type the position you want to move the piece to: ");
+    	String input2 = getInput();
+    	while(!checkInput2(input2)){
+	    	input2 = getInput();
+    	}
+    	
+    	// Convert position to coordinates in array
+    	x2 = convertToInt(input2.charAt(0));
+    	y2 = 8 - Character.getNumericValue(input2.charAt(1));
+	}
 	
 	public static void main(String[] args) {
 		System.out.println("Hello, welcome to my chess program");
@@ -95,7 +121,7 @@ public class Chess{
 		// Initialize array b to chess pieces
 	    for(int i = 0; i < 8; i++){
 	    	b[i][6] = new Pawn(i, 6, true);
-	    	b[i][1] = new Pawn(i, 6, false);
+	    	b[i][1] = new Pawn(i, 1, false);
 	    }
 	    b[0][7] = new Rook(0,7,true);
 	    b[7][7] = new Rook(7,7,true);
@@ -124,28 +150,31 @@ public class Chess{
 	    // Main loop
 	    whiteMove = true;
 	    while(true){
-	    	System.out.print("Type the position of the piece you want to move");
-	    	if(whiteMove)
-	    		System.out.print("(white to move): ");
-	    	else
-	    		System.out.print("(black to move): ");
 	    	
-	    	String input = getInput();
-	    	while(!checkInput(input, whiteMove)){
-		    	input = getInput();
+	    	// Check input
+	    	firstInput();
+	    	
+	    	// Check second input
+	    	secondInput();
+	    	
+	    	// Check if piece can move to that spot
+	    	while(!b[x1][y1].canMove(x2,y2,b)){
+	    		System.out.println("Invalid move");
+	    		firstInput();
+	    		secondInput();
 	    	}
 	    	
-	    	
-	    	
-	    	System.out.print("Type the position you want to move the piece to: ");
-	    	String input2 = getInput();
-	    	
 	    	// Move the pieces in the array
-	    	b[convertToInt(input2.charAt(0))][8 - Character.getNumericValue(input2.charAt(1))] = b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))];
-	    	b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))] = null;
+	    	b[x2][y2] = b[x1][y1];
+	    	b[x1][y1] = null;
+	    	
+	    	// Update position on board
+	    	b[x2][y2].move(x2,y2);
+	    	
 			// Repain the board
 			board.editBoard(b);
 		    window.repaint();
+		    
 		    // Next player's turn
 		    whiteMove = (!whiteMove);
 		}

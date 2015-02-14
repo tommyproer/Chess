@@ -11,18 +11,8 @@ public class Pawn implements Piece {
 			return false;
 		// If pawn is white
 		if(color){
-			if(this.y == 2){
-				if(this.x == x && (y == 3 || y == 4))
-					return true;
-				return false;
-			}else{
-				if(this.x == x && this.y + 1 == y)
-					return true;
-				return false;
-			}
-		}else{
-			if(this.y == 7){
-				if(this.x == x && (y == 6 || y == 5))
+			if(this.y == 6){
+				if(this.x == x && (y == 5 || y == 4))
 					return true;
 				return false;
 			}else{
@@ -30,11 +20,23 @@ public class Pawn implements Piece {
 					return true;
 				return false;
 			}
+		}else{
+			System.out.println("y1: " + this.y + " y2: " + y);
+			if(this.y == 1){
+				if(this.x == x && (y == 2 || y == 3))
+					return true;
+				return false;
+			}else{
+				if(this.x == x && this.y + 1 == y)
+					return true;
+				return false;
+			}
 		}
 	}
 	
 	public void move(int x, int y){
-		
+		this.x = x;
+		this.y = y;
 	
 	}
 	
