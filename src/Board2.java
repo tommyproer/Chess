@@ -10,7 +10,7 @@ import java.io.*;
 import javax.imageio.*;
 
 // Prints out the entire board
-public class Board extends JComponent {
+public class Board2 extends JComponent {
 	
 	private int i = 1;
 	public Graphics g;
@@ -31,15 +31,10 @@ public class Board extends JComponent {
     Image blackBishop = Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\black_bishop.jpg");
     Image blackKing = Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\black_king.jpg");
     Image blackQueen = Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\black_queen.jpg");
-    
 	
-	public Board(Piece[][] b){
-		this.board = b;
+	public Board2(){
 		
-	}
-	
-	public void editBoard(Piece[][] b){
-		this.board = b;
+		
 	}
 	
 	private void mainLoop(){		
@@ -68,36 +63,9 @@ public class Board extends JComponent {
 		for(int i = 0; i < 9; i++){
 			g.drawLine(100 + y*i, 50, 100 + y*i, 50 + 8*x);
 		}
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\a.jpg"), 100, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\b.jpg"), 180, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\c.jpg"), 260, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\d.jpg"), 340, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\e.jpg"), 420, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\f.jpg"), 500, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\g.jpg"), 580, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\h.jpg"), 660, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\8.jpg"), 20, 50, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\7.jpg"), 20, 130, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\6.jpg"), 20, 210, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\5.jpg"), 20, 290, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\4.jpg"), 20, 370, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\3.jpg"), 20, 450, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\2.jpg"), 20, 530, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\1.jpg"), 20, 610, this);
 		
-		
-		
-		// Place all the images of the chess pieces
-		for(int i = 0; i < 8; i++){
-			for(int j = 0; j < 8; j++){
-				if(board[i][j] instanceof Pawn){
-					g.drawImage(whitePawn, 100 + 80*i, 50 + 80*j, this);
-				}
-			}
-		}
 		//Place all the images of the chess pieces
-	    /*
-		for(int i= 0; i < 8; i++){
+	    for(int i= 0; i < 8; i++){
 	    	g.drawImage(whitePawn, 100 + 80*i, 530, this);
 	    }
 	    
@@ -131,8 +99,9 @@ public class Board extends JComponent {
 	    g.drawImage(blackQueen, 340, 50, this);
 	    
 	    g.drawImage(blackKing, 420, 50, this);
-	    */
 	    
 	   
+	    g.drawImage(blank, 260, 50, this);
+	    
     }
 }
