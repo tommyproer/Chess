@@ -1,20 +1,10 @@
 import java.awt.*;
-import java.util.*;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import java.awt.image.*;
-import java.io.*;
-
-import javax.imageio.*;
 
 // Prints out the entire board
 public class Board extends JComponent {
 	
-	private int i = 1;
 	public Graphics g;
-	private static Scanner scan = new Scanner(System.in);
 	Piece[][] board = new Piece[8][8];		// Will store the pieces in the array
 	
 	// Initialize all the piece images into variables
@@ -32,30 +22,13 @@ public class Board extends JComponent {
     Image blackKing = Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\black_king.jpg");
     Image blackQueen = Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\black_queen.jpg");
     
-	
 	public Board(Piece[][] b){
 		this.board = b;
-		
 	}
 	
 	public void editBoard(Piece[][] b){
 		this.board = b;
 	}
-	
-	private void mainLoop(){		
-	}
-	
-	private static String getInput()
-	{
-		System.out.println("> ");
-		return scan.nextLine().toLowerCase();
-	}
-	
-	private void move(Graphics g){
-		
-		g.drawImage(blank, 260, 50, this);
-	}
-	
 
 	public void paint(Graphics g) {
 	    
@@ -68,6 +41,7 @@ public class Board extends JComponent {
 		for(int i = 0; i < 9; i++){
 			g.drawLine(100 + y*i, 50, 100 + y*i, 50 + 8*x);
 		}
+		// Initialize board positions
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\a.jpg"), 100, 691, this);
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\b.jpg"), 180, 691, this);
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\c.jpg"), 260, 691, this);
@@ -85,54 +59,47 @@ public class Board extends JComponent {
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\2.jpg"), 20, 530, this);
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\1.jpg"), 20, 610, this);
 		
-		
-		
 		// Place all the images of the chess pieces
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if(board[i][j] instanceof Pawn){
-					g.drawImage(whitePawn, 100 + 80*i, 50 + 80*j, this);
+					if(board[i][j].getColor()){
+						g.drawImage(whitePawn, 100 + 80*i, 50 + 80*j, this);
+					}else{
+						g.drawImage(blackPawn, 100 + 80*i, 50 + 80*j, this);
+					}
+				}else if(board[i][j] instanceof Rook){
+					if(board[i][j].getColor()){
+						g.drawImage(whiteRook, 100 + 80*i, 50 + 80*j, this);
+					}else{
+						g.drawImage(blackRook, 100 + 80*i, 50 + 80*j, this);
+					}
+				}else if(board[i][j] instanceof Knight){
+					if(board[i][j].getColor()){
+						g.drawImage(whiteKnight, 100 + 80*i, 50 + 80*j, this);
+					}else{
+						g.drawImage(blackKnight, 100 + 80*i, 50 + 80*j, this);
+					}
+				}else if(board[i][j] instanceof Bishop){
+					if(board[i][j].getColor()){
+						g.drawImage(whiteBishop, 100 + 80*i, 50 + 80*j, this);
+					}else{
+						g.drawImage(blackBishop, 100 + 80*i, 50 + 80*j, this);
+					}
+				}else if(board[i][j] instanceof Queen){
+					if(board[i][j].getColor()){
+						g.drawImage(whiteQueen, 100 + 80*i, 50 + 80*j, this);
+					}else{
+						g.drawImage(blackQueen, 100 + 80*i, 50 + 80*j, this);
+					}
+				}else if(board[i][j] instanceof King){
+					if(board[i][j].getColor()){
+						g.drawImage(whiteKing, 100 + 80*i, 50 + 80*j, this);
+					}else{
+						g.drawImage(blackKing, 100 + 80*i, 50 + 80*j, this);
+					}
 				}
 			}
 		}
-		//Place all the images of the chess pieces
-	    /*
-		for(int i= 0; i < 8; i++){
-	    	g.drawImage(whitePawn, 100 + 80*i, 530, this);
-	    }
-	    
-	    g.drawImage(whiteRook, 100, 610, this);
-	    g.drawImage(whiteRook, 660, 610, this);
-	    
-	    g.drawImage(whiteKnight, 180, 610, this);
-	    g.drawImage(whiteKnight, 580, 610, this);
-	    
-	    g.drawImage(whiteBishop, 260, 610, this);
-	    g.drawImage(whiteBishop, 500, 610, this);
-	    
-	    g.drawImage(whiteQueen, 340, 610, this);
-	    g.drawImage(whiteKing, 420, 610, this);
-	    
-	    // The black pieces
-	    
-	    for(int i= 0; i < 8; i++){
-	    	g.drawImage(blackPawn, 100 + 80*i, 130, this);
-	    }
-	    
-	    g.drawImage(blackRook, 100, 50, this);
-	    g.drawImage(blackRook, 660, 50, this);
-	    
-	    g.drawImage(blackKnight, 180, 50, this);
-	    g.drawImage(blackKnight, 580, 50, this);
-	    
-	    g.drawImage(blackBishop, 260, 50, this);
-	    g.drawImage(blackBishop, 500, 50, this);
-	    
-	    g.drawImage(blackQueen, 340, 50, this);
-	    
-	    g.drawImage(blackKing, 420, 50, this);
-	    */
-	    
-	   
     }
 }

@@ -7,56 +7,148 @@ public class Chess{
 	private static Piece[][] b = new Piece[8][8];
 	private static Board board = new Board(b);
 	private static JFrame window;
+	private static boolean whiteMove;
 	
 	private static String getInput()
 	{
-		System.out.println("> ");
+		System.out.print("\n> ");
 		return scan.nextLine();
 	}
 	
-	public static void loop(){
-		
+	// Convert the board position to the number in the array
+	private static int convertToInt(char c){
+		if(c == 'a')
+			return 0;
+		if(c == 'b')
+			return 1;
+		if(c == 'c')
+			return 2;
+		if(c == 'd')
+			return 3;
+		if(c == 'e')
+			return 4;
+		if(c == 'f')
+			return 5;
+		if(c == 'g')
+			return 6;
+		if(c == 'h')
+			return 7;
+		return -1;
 	}
+	
+	// Checks if the first input is valid
+	private static boolean checkInput(String input, boolean whiteMove){
+		if(input.length() != 2){
+			System.out.println("Invalid position(length of position is not 2)");
+			return false;
+		}
+		if(convertToInt(input.charAt(0)) == -1){
+			System.out.println("Invalid position");
+			return false;
+		}
+		if(Character.getNumericValue(input.charAt(1)) > 8 || Character.getNumericValue(input.charAt(1)) < 1){
+			System.out.println("Invalid positon");
+			return false;
+		}
+		if(b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))] == null){
+			System.out.println("No piece located at " + input.charAt(0) + input.charAt(1));
+			return false;
+		}
+		if(b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))].getColor() != whiteMove){
+			System.out.print("Please select a ");
+			if(whiteMove)
+				System.out.print("white piece to move");
+			else
+				System.out.print("black piece to move");
+			return false;
+		}
+		return true;
+	}
+	
+	// Checks if the second input is valid
+	private static boolean checkInput2(String input){
+		if(input.length() != 2){
+			System.out.println("Invalid position(length of position is not 2)");
+			return false;
+		}
+		if(convertToInt(input.charAt(0)) == -1){
+			System.out.println("Invalid position");
+			return false;
+		}
+		if(Character.getNumericValue(input.charAt(1)) > 8 || Character.getNumericValue(input.charAt(1)) < 1){
+			System.out.println("Invalid positon");
+			return false;
+		}
+		if(b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))] == null){
+			System.out.println("No piece located at " + input.charAt(0) + input.charAt(1));
+			return false;
+		}
+		return true;
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		System.out.println("Hello, welcome to my chess program");
 		System.out.println("Type end to terminate the program");
 		
-		// Initialize array b
-		
+		// Initialize array b to chess pieces
 	    for(int i = 0; i < 8; i++){
 	    	b[i][6] = new Pawn(i, 6, true);
+	    	b[i][1] = new Pawn(i, 6, false);
 	    }
+	    b[0][7] = new Rook(0,7,true);
+	    b[7][7] = new Rook(7,7,true);
+	    b[0][0] = new Rook(0,0,false);
+	    b[7][0] = new Rook(7,0,false);
+	    b[1][7] = new Knight(1,7,true);
+	    b[6][7] = new Knight(6,7,true);
+	    b[1][0] = new Knight(1,0,false);
+	    b[6][0] = new Knight(6,0,false);
+	    b[2][7] = new Bishop(2,7,true);
+	    b[5][7] = new Bishop(5,7,true);
+	    b[2][0] = new Bishop(2,0,false);
+	    b[5][0] = new Bishop(5,0,false);
+	    b[3][7] = new Queen(3,7,true);
+	    b[3][0] = new Queen(3,0,false);
+	    b[4][7] = new King(4,7,true);
+	    b[4][0] = new King(4,0,false);
 	    
-	    
+	    // Create JFrame window
 		JFrame window = new JFrame();
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setBounds(0, 0, 900, 800);
-	    
 	    window.getContentPane().add(board);
 	    window.setVisible(true);
 	    
-	    
 	    // Main loop
-	    String move = getInput();
-		while(!move.equals("end")){
-			System.out.println(move);
-			if(move.equals("1")){
-				System.out.println("test");
-				for(int i = 0; i < 8; i++){
-			    	b[i][1] = new Pawn(i, 1, false);
-			    }
-			    
-			}else if(move.equals("2")){
-				b[0][4] = b[0][6];
-				b[0][6] = null;
-				
-			}
+	    whiteMove = true;
+	    while(true){
+	    	System.out.print("Type the position of the piece you want to move");
+	    	if(whiteMove)
+	    		System.out.print("(white to move): ");
+	    	else
+	    		System.out.print("(black to move): ");
+	    	
+	    	String input = getInput();
+	    	while(!checkInput(input, whiteMove)){
+		    	input = getInput();
+	    	}
+	    	
+	    	
+	    	
+	    	System.out.print("Type the position you want to move the piece to: ");
+	    	String input2 = getInput();
+	    	
+	    	// Move the pieces in the array
+	    	b[convertToInt(input2.charAt(0))][8 - Character.getNumericValue(input2.charAt(1))] = b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))];
+	    	b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))] = null;
+			// Repain the board
 			board.editBoard(b);
 		    window.repaint();
-			move = getInput();
+		    // Next player's turn
+		    whiteMove = (!whiteMove);
 		}
 	    
 	}
-
 }
