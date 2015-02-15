@@ -6,13 +6,13 @@ public class Chess{
 	private static Scanner scan = new Scanner(System.in);
 	private static Piece[][] b = new Piece[8][8];
 	private static Board board = new Board(b);
-	private static JFrame window;
+	//private static JFrame window;
 	private static boolean whiteMove;
 	public static int x1,x2,y1,y2;
 	
 	private static String getInput()
 	{
-		System.out.print("\n> ");
+		//System.out.print("\n> ");
 		return scan.nextLine();
 	}
 	
@@ -58,9 +58,9 @@ public class Chess{
 		if(b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))].getColor() != whiteMove){
 			System.out.print("Please select a ");
 			if(whiteMove)
-				System.out.print("white piece to move");
+				System.out.println("white piece to move");
 			else
-				System.out.print("black piece to move");
+				System.out.println("black piece to move");
 			return false;
 		}
 		return true;
@@ -83,6 +83,7 @@ public class Chess{
 		return true;
 	}
 	
+	// The user will enter in the first input, the position of the piece they want to move
 	private static void firstInput(){
 		// Check if first input is valid
 		System.out.print("Type the position of the piece to move");
@@ -90,7 +91,6 @@ public class Chess{
     		System.out.print("(white to move): ");
     	else
     		System.out.print("(black to move): ");
-    	
     	String input = getInput();
     	while(!checkInput(input, whiteMove)){
 	    	input = getInput();
@@ -101,6 +101,7 @@ public class Chess{
     	y1 = 8 - Character.getNumericValue(input.charAt(1));
 	}
 	
+	// The user will enter in the second input, the position of where they want the piece to go to
 	private static void secondInput(){
 		// Check if second input is valid
 		System.out.print("Type the position you want to move the piece to: ");
@@ -117,6 +118,10 @@ public class Chess{
 	public static void main(String[] args) {
 		System.out.println("Hello, welcome to my chess program");
 		System.out.println("Type end to terminate the program");
+		
+		for(int i = 0; i < 10; i ++){
+			System.out.println(i);
+		}
 		
 		// Initialize array b to chess pieces
 	    for(int i = 0; i < 8; i++){
@@ -171,7 +176,7 @@ public class Chess{
 	    	// Update position on board
 	    	b[x2][y2].move(x2,y2);
 	    	
-			// Repain the board
+			// Repaint the board
 			board.editBoard(b);
 		    window.repaint();
 		    

@@ -10,8 +10,8 @@ public class King implements Piece {
 	}
 	
 	public void move(int x, int y){
-		
-		
+		this.x = x;
+		this.y = y;
 	}
 	
 	public boolean getColor(){
