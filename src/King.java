@@ -6,6 +6,16 @@ public class King implements Piece {
 	boolean color;
 	
 	public boolean canMove(int x, int y, Piece[][] b){
+		// Makes sure its not moving to its own position
+		if(this.x == x && this.y == y)
+			return false;
+		// Makes sure its not moving to a spot where its own piece is already occupying it
+		if((b[x][y] != null) && b[this.x][this.y].getColor() == b[x][y].getColor())
+			return false;
+		// Checks if King can move to that position
+		if(Math.abs(this.x - x) > 1 || Math.abs(this.y - y) > 1){
+			return false;
+		}
 		return true;
 	}
 	
