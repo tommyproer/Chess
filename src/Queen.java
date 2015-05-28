@@ -3,7 +3,7 @@ public class Queen implements Piece {
 	//Store the positions
 	int x, y;
 	//Color is 1 for white, 2 for black
-	boolean color;
+	boolean color, hasMoved;
 	
 	public boolean canMove(int x, int y, Piece[][] b){
 		// Makes sure its not moving to its own position
@@ -76,6 +76,13 @@ public class Queen implements Piece {
 	
 	public boolean getColor(){
 		return color;
+	}
+	
+	public String getPieceName(){
+		return "Queen";
+	}
+	public boolean getHasMoved(){
+		return hasMoved;
 	}
 	
 	public Queen(int x, int y, boolean color){

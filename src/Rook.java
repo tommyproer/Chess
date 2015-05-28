@@ -4,6 +4,7 @@ public class Rook implements Piece {
 	int x, y;
 	//Color is 1 for white, 2 for black
 	boolean color;
+	boolean hasMoved;
 	
 	public boolean canMove(int x, int y, Piece[][] b){
 		// Makes sure the the rook is moving either vertically or horizontally
@@ -48,16 +49,26 @@ public class Rook implements Piece {
 	public void move(int x, int y){
 		this.x = x;
 		this.y = y;
+		hasMoved = true;
 	}
 	
 	public boolean getColor(){
 		return color;
 	}
 	
+	public String getPieceName(){
+		return "Rook";
+	}
+	
+	public boolean getHasMoved(){
+		return hasMoved;
+	}
+	
 	public Rook(int x, int y, boolean color){
 		this.x = x;
 		this.y = y;
 		this.color = color;
+		hasMoved = false;
 	}
 
 }

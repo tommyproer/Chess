@@ -3,7 +3,7 @@ public class Pawn implements Piece {
 	//Store the positions
 	int x, y;
 	//Color is 1 for white, 2 for black
-	private boolean color;
+	private boolean color, hasMoved;
 	
 	// Test if the pawn can take that piece
 	private boolean takePiece(int x, int y, Piece[][] b){
@@ -84,6 +84,14 @@ public class Pawn implements Piece {
 	
 	public boolean getColor(){
 		return color;
+	}
+	
+	public String getPieceName(){
+		return "Pawn";
+	}
+	
+	public boolean getHasMoved(){
+		return hasMoved;
 	}
 	
 	public Pawn(int x, int y, boolean color){

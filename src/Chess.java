@@ -119,10 +119,6 @@ public class Chess{
 		System.out.println("Hello, welcome to my chess program");
 		System.out.println("Type end to terminate the program");
 		
-		for(int i = 0; i < 10; i ++){
-			System.out.println(i);
-		}
-		
 		// Initialize array b to chess pieces
 	    for(int i = 0; i < 8; i++){
 	    	b[i][6] = new Pawn(i, 6, true);
@@ -175,6 +171,32 @@ public class Chess{
 	    	
 	    	// Update position on board
 	    	b[x2][y2].move(x2,y2);
+	    	
+	    	//SPECIAL CASE WHEN KING IS CASTLING, need to update rook
+	    	//For white king castling queen side
+	    	if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 2 && y2 == 7){
+	    		b[3][7] = b[0][7];
+	    		b[0][7] = null;
+	    		b[3][7].move(0,7);
+	    	}
+	    	//For white king castling king side
+	    	if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 6 && y2 == 7){
+	    		b[5][7] = b[7][7];
+	    		b[7][7] = null;
+	    		b[5][7].move(7,7);
+	    	}
+	    	//For black king castling queen side
+	    	if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 2 && y2 == 0){
+	    		b[3][0] = b[0][0];
+	    		b[0][0] = null;
+	    		b[3][0].move(0,0);
+	    	}
+	    	//For black king castling king side
+	    	if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 6 && y2 == 0){
+	    		b[5][0] = b[7][0];
+	    		b[7][0] = null;
+	    		b[5][0].move(7,0);
+	    	}
 	    	
 			// Repaint the board
 			board.editBoard(b);

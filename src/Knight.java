@@ -3,7 +3,7 @@ public class Knight implements Piece {
 	//Store the positions
 	int x, y;
 	//Color is 1 for white, 2 for black
-	boolean color;
+	boolean color, hasMoved;
 	
 	public boolean canMove(int x, int y, Piece[][] b){
 		// Makes sure its not moving to its own position
@@ -34,8 +34,16 @@ public class Knight implements Piece {
 		
 	}
 	
+	public String getPieceName(){
+		return "Knight";
+	}
+	
 	public boolean getColor(){
 		return color;
+	}
+	
+	public boolean getHasMoved(){
+		return hasMoved;
 	}
 	
 	public Knight(int x, int y, boolean color){
