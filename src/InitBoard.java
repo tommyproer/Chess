@@ -10,7 +10,7 @@ import java.io.*;
 import javax.imageio.*;
 
 // Prints out the entire board
-public class Board2 extends JComponent {
+public class InitBoard extends JComponent {
 	
 	private int i = 1;
 	public Graphics g;
@@ -18,7 +18,7 @@ public class Board2 extends JComponent {
 	Piece[][] board = new Piece[8][8];		// Will store the pieces in the array
 	
 	// Initialize all the piece images into variables
-	String baseDir = "/home/tommy/workspace/Chess/ChessPieces/";
+	String baseDir = "/home/tommy/workspace/Chess/resources/";
         Image blank = Toolkit.getDefaultToolkit().getImage(baseDir + "blank.jpg");
         Image whitePawn = Toolkit.getDefaultToolkit().getImage(baseDir + "white_pawn.jpg");
         Image whiteRook = Toolkit.getDefaultToolkit().getImage(baseDir + "white_rook.jpg");
@@ -33,7 +33,7 @@ public class Board2 extends JComponent {
         Image blackKing = Toolkit.getDefaultToolkit().getImage(baseDir + "black_king.jpg");
         Image blackQueen = Toolkit.getDefaultToolkit().getImage(baseDir + "black_queen.jpg");
 	
-	public Board2(){
+	public InitBoard(){
 		
 		
 	}

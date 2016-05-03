@@ -8,7 +8,7 @@ public class Board extends JComponent {
 	Piece[][] board = new Piece[8][8];		// Will store the pieces in the array
 	
 	// Initialize all the piece images into variables
-	String baseDir = "/home/tommy/workspace/Chess/ChessPieces/";
+	String baseDir = "/home/tommy/workspace/Chess/resources/";
 	Image blank = Toolkit.getDefaultToolkit().getImage(baseDir + "blank.jpg");
 	Image whitePawn = Toolkit.getDefaultToolkit().getImage(baseDir + "white_pawn.jpg");
 	Image whiteRook = Toolkit.getDefaultToolkit().getImage(baseDir + "white_rook.jpg");
