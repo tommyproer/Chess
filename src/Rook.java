@@ -1,3 +1,4 @@
+package src;
 
 public class Rook implements Piece {
 	//Store the positions

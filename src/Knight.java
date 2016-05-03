@@ -1,3 +1,4 @@
+package src;
 
 public class Knight implements Piece {
 	//Store the positions

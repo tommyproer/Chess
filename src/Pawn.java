@@ -1,3 +1,4 @@
+package src;
 
 public class Pawn implements Piece {
 	//Store the positions

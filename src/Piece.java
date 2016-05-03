@@ -1,3 +1,5 @@
+package src;
+
 public interface Piece {
 
 	public boolean canMove(int x, int y, Piece[][] b);

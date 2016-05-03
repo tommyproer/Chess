@@ -1,3 +1,5 @@
+package src;
+
 public class Bishop implements Piece {
 	//Store the positions
 	int x, y;

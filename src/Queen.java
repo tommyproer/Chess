@@ -1,3 +1,4 @@
+package src;
 
 public class Queen implements Piece {
 	//Store the positions

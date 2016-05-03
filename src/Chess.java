@@ -1,3 +1,5 @@
+package src;
+
 import java.util.Scanner;
 import javax.swing.JFrame;
 
@@ -84,35 +86,36 @@ public class Chess{
 	}
 	
 	// The user will enter in the first input, the position of the piece they want to move
-	private static void firstInput(){
+	private static void getPieceSource(){
 		// Check if first input is valid
 		System.out.print("Type the position of the piece to move");
-    	if(whiteMove)
-    		System.out.print("(white to move): ");
-    	else
-    		System.out.print("(black to move): ");
-    	String input = getInput();
-    	while(!checkInput(input, whiteMove)){
-	    	input = getInput();
-    	}
+    		if(whiteMove){
+    			System.out.println("(white to move): ");
+		}else{
+    			System.out.println("(black to move): ");
+		}
+    		String input = getInput();
+    		while(!checkInput(input, whiteMove)){
+	    		input = getInput();
+    		}
     	
-    	// Convert position to coordinates in array
-    	x1 = convertToInt(input.charAt(0));
-    	y1 = 8 - Character.getNumericValue(input.charAt(1));
+    		// Convert position to coordinates in array
+    		x1 = convertToInt(input.charAt(0));
+    		y1 = 8 - Character.getNumericValue(input.charAt(1));
 	}
 	
 	// The user will enter in the second input, the position of where they want the piece to go to
-	private static void secondInput(){
+	private static void getPieceTarget(){
 		// Check if second input is valid
 		System.out.print("Type the position you want to move the piece to: ");
-    	String input2 = getInput();
-    	while(!checkInput2(input2)){
-	    	input2 = getInput();
-    	}
+    		String input2 = getInput();
+    		while(!checkInput2(input2)){
+	    		input2 = getInput();
+    		}
     	
-    	// Convert position to coordinates in array
-    	x2 = convertToInt(input2.charAt(0));
-    	y2 = 8 - Character.getNumericValue(input2.charAt(1));
+    		// Convert position to coordinates in array
+    		x2 = convertToInt(input2.charAt(0));
+    		y2 = 8 - Character.getNumericValue(input2.charAt(1));
 	}
 	
 	public static void main(String[] args) {
@@ -153,16 +156,16 @@ public class Chess{
 	    while(true){
 	    	
 	    	// Check input
-	    	firstInput();
+	    	getPieceSource();
 	    	
 	    	// Check second input
-	    	secondInput();
+	    	getPieceTarget();
 	    	
 	    	// Check if piece can move to that spot
 	    	while(!b[x1][y1].canMove(x2,y2,b)){
 	    		System.out.println("Invalid move");
-	    		firstInput();
-	    		secondInput();
+	    		getPieceSource();
+	    		getPieceTarget();
 	    	}
 	    	
 	    	// Move the pieces in the array
