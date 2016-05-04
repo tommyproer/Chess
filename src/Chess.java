@@ -123,90 +123,90 @@ public class Chess{
 		System.out.println("Type end to terminate the program");
 		
 		// Initialize array b to chess pieces
-	    for(int i = 0; i < 8; i++){
-	    	b[i][6] = new Pawn(i, 6, true);
-	    	b[i][1] = new Pawn(i, 1, false);
-	    }
-	    b[0][7] = new Rook(0,7,true);
-	    b[7][7] = new Rook(7,7,true);
-	    b[0][0] = new Rook(0,0,false);
-	    b[7][0] = new Rook(7,0,false);
-	    b[1][7] = new Knight(1,7,true);
-	    b[6][7] = new Knight(6,7,true);
-	    b[1][0] = new Knight(1,0,false);
-	    b[6][0] = new Knight(6,0,false);
-	    b[2][7] = new Bishop(2,7,true);
-	    b[5][7] = new Bishop(5,7,true);
-	    b[2][0] = new Bishop(2,0,false);
-	    b[5][0] = new Bishop(5,0,false);
-	    b[3][7] = new Queen(3,7,true);
-	    b[3][0] = new Queen(3,0,false);
-	    b[4][7] = new King(4,7,true);
-	    b[4][0] = new King(4,0,false);
+	    	for(int i = 0; i < 8; i++){
+	    		b[i][6] = new Pawn(i, 6, true);
+	    		b[i][1] = new Pawn(i, 1, false);
+	    	}
+	    	b[0][7] = new Rook(0,7,true);
+	    	b[7][7] = new Rook(7,7,true);
+	    	b[0][0] = new Rook(0,0,false);
+	    	b[7][0] = new Rook(7,0,false);
+	    	b[1][7] = new Knight(1,7,true);
+	    	b[6][7] = new Knight(6,7,true);
+	    	b[1][0] = new Knight(1,0,false);
+	    	b[6][0] = new Knight(6,0,false);
+	    	b[2][7] = new Bishop(2,7,true);
+	    	b[5][7] = new Bishop(5,7,true);
+	    	b[2][0] = new Bishop(2,0,false);
+	    	b[5][0] = new Bishop(5,0,false);
+	    	b[3][7] = new Queen(3,7,true);
+	    	b[3][0] = new Queen(3,0,false);
+	    	b[4][7] = new King(4,7,true);
+	    	b[4][0] = new King(4,0,false);
 	    
-	    // Create JFrame window
+	    	// Create JFrame window
 		JFrame window = new JFrame();
-	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    window.setBounds(0, 0, 900, 800);
-	    window.getContentPane().add(board);
-	    window.setVisible(true);
+	    	window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    	window.setBounds(0, 0, 900, 800);
+	    	window.getContentPane().add(board);
+	    	window.setVisible(true);
 	    
-	    // Main loop
-	    whiteMove = true;
-	    while(true){
+	    	// Main loop
+	    	whiteMove = true;
+	    	while(true){
 	    	
-	    	// Check input
-	    	getPieceSource();
-	    	
-	    	// Check second input
-	    	getPieceTarget();
-	    	
-	    	// Check if piece can move to that spot
-	    	while(!b[x1][y1].canMove(x2,y2,b)){
-	    		System.out.println("Invalid move");
+	    		// Check input
 	    		getPieceSource();
+	    	
+	    		// Check second input
 	    		getPieceTarget();
-	    	}
 	    	
-	    	// Move the pieces in the array
-	    	b[x2][y2] = b[x1][y1];
-	    	b[x1][y1] = null;
+	    		// Check if piece can move to that spot
+	    		while(!b[x1][y1].canMove(x2,y2,b)){
+	    			System.out.println("Invalid move");
+	    			getPieceSource();
+	    			getPieceTarget();
+	    		}
 	    	
-	    	// Update position on board
-	    	b[x2][y2].move(x2,y2);
+	    		// Move the pieces in the array
+	    		b[x2][y2] = b[x1][y1];
+	    		b[x1][y1] = null;
 	    	
-	    	//SPECIAL CASE WHEN KING IS CASTLING, need to update rook
-	    	//For white king castling queen side
-	    	if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 2 && y2 == 7){
-	    		b[3][7] = b[0][7];
-	    		b[0][7] = null;
-	    		b[3][7].move(0,7);
-	    	}
-	    	//For white king castling king side
-	    	if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 6 && y2 == 7){
-	    		b[5][7] = b[7][7];
-	    		b[7][7] = null;
-	    		b[5][7].move(7,7);
-	    	}
-	    	//For black king castling queen side
-	    	if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 2 && y2 == 0){
-	    		b[3][0] = b[0][0];
-	    		b[0][0] = null;
-	    		b[3][0].move(0,0);
-	    	}
-	    	//For black king castling king side
-	    	if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 6 && y2 == 0){
-	    		b[5][0] = b[7][0];
-	    		b[7][0] = null;
-	    		b[5][0].move(7,0);
-	    	}
+	    		// Update position on board
+	    		b[x2][y2].move(x2,y2);
+	    	
+	    		//SPECIAL CASE WHEN KING IS CASTLING, need to update rook
+	    		//For white king castling queen side
+	    		if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 2 && y2 == 7){
+	    			b[3][7] = b[0][7];
+	    			b[0][7] = null;
+	    			b[3][7].move(0,7);
+	    		}
+	    		//For white king castling king side
+	    		if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 6 && y2 == 7){
+	    			b[5][7] = b[7][7];
+	    			b[7][7] = null;
+	    			b[5][7].move(7,7);
+	    		}
+	    		//For black king castling queen side
+	    		if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 2 && y2 == 0){
+	    			b[3][0] = b[0][0];
+	    			b[0][0] = null;
+	    			b[3][0].move(0,0);
+	    		}
+	    		//For black king castling king side
+	    		if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 6 && y2 == 0){
+	    			b[5][0] = b[7][0];
+	    			b[7][0] = null;
+	    			b[5][0].move(7,0);
+	    		}
 	    	
 			// Repaint the board
 			board.editBoard(b);
-		    window.repaint();
+		    	window.repaint();
 		    
-		    // Next player's turn
-		    whiteMove = (!whiteMove);
+		    	// Next player's turn
+		    	whiteMove = (!whiteMove);
 		}
 	    
 	}

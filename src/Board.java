@@ -1,7 +1,10 @@
 package src;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Image;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import javax.swing.JComponent;
+import config.Path;
 
 // Prints out the entire board
 public class Board extends JComponent {
@@ -10,20 +13,19 @@ public class Board extends JComponent {
 	Piece[][] board = new Piece[8][8];		// Will store the pieces in the array
 	
 	// Initialize all the piece images into variables
-	String baseDir = "/home/tommy/workspace/Chess/resources/";
-	Image blank = Toolkit.getDefaultToolkit().getImage(baseDir + "blank.jpg");
-	Image whitePawn = Toolkit.getDefaultToolkit().getImage(baseDir + "white_pawn.jpg");
-	Image whiteRook = Toolkit.getDefaultToolkit().getImage(baseDir + "white_rook.jpg");
-	Image whiteKnight = Toolkit.getDefaultToolkit().getImage(baseDir + "white_knight.jpg");
-	Image whiteBishop = Toolkit.getDefaultToolkit().getImage(baseDir + "white_bishop.jpg");
-	Image whiteQueen = Toolkit.getDefaultToolkit().getImage(baseDir + "white_queen.jpg");
-    	Image blackPawn = Toolkit.getDefaultToolkit().getImage(baseDir + "black_pawn.jpg");
-    	Image whiteKing = Toolkit.getDefaultToolkit().getImage(baseDir + "white_king.jpg");
-    	Image blackRook = Toolkit.getDefaultToolkit().getImage(baseDir + "black_rook.jpg");
-    	Image blackKnight = Toolkit.getDefaultToolkit().getImage(baseDir + "black_knight.jpg");
-    	Image blackBishop = Toolkit.getDefaultToolkit().getImage(baseDir + "black_bishop.jpg");
-    	Image blackKing = Toolkit.getDefaultToolkit().getImage(baseDir + "black_king.jpg");
-    	Image blackQueen = Toolkit.getDefaultToolkit().getImage(baseDir + "black_queen.jpg");
+	Image blank = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "blank.jpg");
+	Image whitePawn = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_pawn.jpg");
+	Image whiteRook = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_rook.jpg");
+	Image whiteKnight = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_knight.jpg");
+	Image whiteBishop = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_bishop.jpg");
+	Image whiteQueen = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_queen.jpg");
+    	Image blackPawn = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_pawn.jpg");
+    	Image whiteKing = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_king.jpg");
+    	Image blackRook = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_rook.jpg");
+    	Image blackKnight = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_knight.jpg");
+    	Image blackBishop = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_bishop.jpg");
+    	Image blackKing = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_king.jpg");
+    	Image blackQueen = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_queen.jpg");
     
 	public Board(Piece[][] b){
 		this.board = b;
