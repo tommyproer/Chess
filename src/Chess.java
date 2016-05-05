@@ -1,12 +1,15 @@
 package src;
 
 import java.util.Scanner;
+
 import javax.swing.JFrame;
+
+import config.Config;
 
 public class Chess{
 
 	private static Scanner scan = new Scanner(System.in);
-	private static Piece[][] b = new Piece[8][8];
+	private static Piece[][] b = new Piece[Config.BOARD_SIZE][Config.BOARD_SIZE];
 	private static Board board = new Board(b);
 	//private static JFrame window;
 	private static boolean whiteMove;
@@ -117,11 +120,22 @@ public class Chess{
     		x2 = convertToInt(input2.charAt(0));
     		y2 = 8 - Character.getNumericValue(input2.charAt(1));
 	}
+
+	public void Chess(){
+			
+
+
+	}
+
+	public void run(){
+
+	}
 	
 	public static void main(String[] args) {
 		System.out.println("Hello, welcome to my chess program");
 		System.out.println("Type end to terminate the program");
 		
+		Chess chess = new Chess();
 		// Initialize array b to chess pieces
 	    	for(int i = 0; i < 8; i++){
 	    		b[i][6] = new Pawn(i, 6, true);

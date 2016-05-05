@@ -3,8 +3,10 @@ package src;
 import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+
 import javax.swing.JComponent;
-import config.Path;
+
+import config.Config;
 
 // Prints out the entire board
 public class Board extends JComponent {
@@ -13,19 +15,19 @@ public class Board extends JComponent {
 	Piece[][] board = new Piece[8][8];		// Will store the pieces in the array
 	
 	// Initialize all the piece images into variables
-	Image blank = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "blank.jpg");
-	Image whitePawn = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_pawn.jpg");
-	Image whiteRook = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_rook.jpg");
-	Image whiteKnight = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_knight.jpg");
-	Image whiteBishop = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_bishop.jpg");
-	Image whiteQueen = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_queen.jpg");
-    	Image blackPawn = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_pawn.jpg");
-    	Image whiteKing = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "white_king.jpg");
-    	Image blackRook = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_rook.jpg");
-    	Image blackKnight = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_knight.jpg");
-    	Image blackBishop = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_bishop.jpg");
-    	Image blackKing = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_king.jpg");
-    	Image blackQueen = Toolkit.getDefaultToolkit().getImage(Path.MAIN_PATH + "black_queen.jpg");
+	Image blank = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "blank.jpg");
+	Image whitePawn = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "white_pawn.jpg");
+	Image whiteRook = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "white_rook.jpg");
+	Image whiteKnight = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "white_knight.jpg");
+	Image whiteBishop = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "white_bishop.jpg");
+	Image whiteQueen = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "white_queen.jpg");
+    	Image blackPawn = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "black_pawn.jpg");
+    	Image whiteKing = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "white_king.jpg");
+    	Image blackRook = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "black_rook.jpg");
+    	Image blackKnight = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "black_knight.jpg");
+    	Image blackBishop = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "black_bishop.jpg");
+    	Image blackKing = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "black_king.jpg");
+    	Image blackQueen = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "black_queen.jpg");
     
 	public Board(Piece[][] b){
 		this.board = b;
@@ -47,22 +49,22 @@ public class Board extends JComponent {
 			g.drawLine(100 + y*i, 50, 100 + y*i, 50 + 8*x);
 		}
 		// Initialize board positions
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\a.jpg"), 100, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\b.jpg"), 180, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\c.jpg"), 260, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\d.jpg"), 340, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\e.jpg"), 420, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\f.jpg"), 500, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\g.jpg"), 580, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\h.jpg"), 660, 691, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\8.jpg"), 20, 50, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\7.jpg"), 20, 130, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\6.jpg"), 20, 210, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\5.jpg"), 20, 290, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\4.jpg"), 20, 370, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\3.jpg"), 20, 450, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\2.jpg"), 20, 530, this);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chent10\\Pictures\\ChessPieces\\1.jpg"), 20, 610, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "a.jpg"), 100, 691, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "b.jpg"), 180, 691, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "c.jpg"), 260, 691, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "d.jpg"), 340, 691, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "e.jpg"), 420, 691, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "f.jpg"), 500, 691, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "g.jpg"), 580, 691, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "h.jpg"), 660, 691, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "8.jpg"), 20, 50, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "7.jpg"), 20, 130, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "6.jpg"), 20, 210, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "5.jpg"), 20, 290, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "4.jpg"), 20, 370, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "3.jpg"), 20, 450, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "2.jpg"), 20, 530, this);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "1.jpg"), 20, 610, this);
 		
 		// Place all the images of the chess pieces
 		for(int i = 0; i < 8; i++){
