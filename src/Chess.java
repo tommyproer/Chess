@@ -8,21 +8,20 @@ import config.Config;
 
 public class Chess{
 
-	private static Scanner scan = new Scanner(System.in);
-	private static Piece[][] b = new Piece[Config.BOARD_SIZE][Config.BOARD_SIZE];
-	private static Board board = new Board(b);
-	//private static JFrame window;
-	private static boolean whiteMove;
-	public static int x1,x2,y1,y2;
+	private Scanner scan = new Scanner(System.in);
+	private Piece[][] b = new Piece[Config.BOARD_SIZE][Config.BOARD_SIZE];
+	private Board board = new Board(b);
+	//private JFrame window;
+	private boolean whiteMove;
+	public int x1,x2,y1,y2;
 	
-	private static String getInput()
+	private String getInput()
 	{
-		//System.out.print("\n> ");
 		return scan.nextLine();
 	}
 	
 	// Convert the board position to the number in the array
-	private static int convertToInt(char c){
+	private int convertToInt(char c){
 		if(c == 'a')
 			return 0;
 		if(c == 'b')
@@ -43,7 +42,7 @@ public class Chess{
 	}
 	
 	// Checks if the first input is valid
-	private static boolean checkInput(String input, boolean whiteMove){
+	private boolean checkInput(String input, boolean whiteMove){
 		if(input.length() != 2){
 			System.out.println("Invalid position(length of position is not 2)");
 			return false;
@@ -72,7 +71,7 @@ public class Chess{
 	}
 	
 	// Checks if the second input is valid
-	private static boolean checkInput2(String input){
+	private boolean checkInput2(String input){
 		if(input.length() != 2){
 			System.out.println("Invalid position(length of position is not 2)");
 			return false;
@@ -89,7 +88,7 @@ public class Chess{
 	}
 	
 	// The user will enter in the first input, the position of the piece they want to move
-	private static void getPieceSource(){
+	private void getPieceSource(){
 		// Check if first input is valid
 		System.out.print("Type the position of the piece to move");
     		if(whiteMove){
@@ -108,7 +107,7 @@ public class Chess{
 	}
 	
 	// The user will enter in the second input, the position of where they want the piece to go to
-	private static void getPieceTarget(){
+	private void getPieceTarget(){
 		// Check if second input is valid
 		System.out.print("Type the position you want to move the piece to: ");
     		String input2 = getInput();
@@ -122,20 +121,13 @@ public class Chess{
 	}
 
 	public void Chess(){
-			
-
-
+		
+	    
+	    			
 	}
 
 	public void run(){
 
-	}
-	
-	public static void main(String[] args) {
-		System.out.println("Hello, welcome to my chess program");
-		System.out.println("Type end to terminate the program");
-		
-		Chess chess = new Chess();
 		// Initialize array b to chess pieces
 	    	for(int i = 0; i < 8; i++){
 	    		b[i][6] = new Pawn(i, 6, true);
@@ -156,19 +148,20 @@ public class Chess{
 	    	b[3][7] = new Queen(3,7,true);
 	    	b[3][0] = new Queen(3,0,false);
 	    	b[4][7] = new King(4,7,true);
-	    	b[4][0] = new King(4,0,false);
-	    
-	    	// Create JFrame window
+	    	b[4][0] = new King(4,0,false);	
+		// Create JFrame window
 		JFrame window = new JFrame();
 	    	window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    	window.setBounds(0, 0, 900, 800);
 	    	window.getContentPane().add(board);
 	    	window.setVisible(true);
-	    
+
+		System.out.println("Hello, welcome to my chess program");
+		System.out.println("Type end to terminate the program");
+
 	    	// Main loop
 	    	whiteMove = true;
 	    	while(true){
-	    	
 	    		// Check input
 	    		getPieceSource();
 	    	
@@ -221,7 +214,6 @@ public class Chess{
 		    
 		    	// Next player's turn
 		    	whiteMove = (!whiteMove);
-		}
-	    
+		}	
 	}
 }
