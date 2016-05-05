@@ -6,11 +6,13 @@ import javax.swing.JFrame;
 
 import config.Config;
 
+//TODO: Make code a lot clearer and separate out calls even more, add logic of board in separate class or in config
+//TODO: Also make a Builder for pieces
 public class Chess{
 
-	private Scanner scan = new Scanner(System.in);
-	private Piece[][] b = new Piece[Config.BOARD_SIZE][Config.BOARD_SIZE];
-	private Board board = new Board(b);
+	private final Scanner scan = new Scanner(System.in);
+	private final Piece[][] pieceMap = new Piece[Config.BOARD_SIZE][Config.BOARD_SIZE];
+	private Board board = new Board(pieceMap);
 	//private JFrame window;
 	private boolean whiteMove;
 	public int x1,x2,y1,y2;
@@ -55,11 +57,11 @@ public class Chess{
 			System.out.println("Invalid positon");
 			return false;
 		}
-		if(b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))] == null){
+		if(pieceMap[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))] == null){
 			System.out.println("No piece located at " + input.charAt(0) + input.charAt(1));
 			return false;
 		}
-		if(b[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))].getColor() != whiteMove){
+		if(pieceMap[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))].getColor() != whiteMove){
 			System.out.print("Please select a ");
 			if(whiteMove)
 				System.out.println("white piece to move");
@@ -121,34 +123,41 @@ public class Chess{
 	}
 
 	public void Chess(){
-		
+		init();	
 	    
 	    			
 	}
 
-	public void run(){
+	private void init(){
+		
+		
+	 	
 
-		// Initialize array b to chess pieces
+	}
+
+	protected void run(){
+
+		// Initialize array pieceMap to chess pieces
 	    	for(int i = 0; i < 8; i++){
-	    		b[i][6] = new Pawn(i, 6, true);
-	    		b[i][1] = new Pawn(i, 1, false);
+	    		pieceMap[i][6] = new Pawn(i, 6, true);
+	    		pieceMap[i][1] = new Pawn(i, 1, false);
 	    	}
-	    	b[0][7] = new Rook(0,7,true);
-	    	b[7][7] = new Rook(7,7,true);
-	    	b[0][0] = new Rook(0,0,false);
-	    	b[7][0] = new Rook(7,0,false);
-	    	b[1][7] = new Knight(1,7,true);
-	    	b[6][7] = new Knight(6,7,true);
-	    	b[1][0] = new Knight(1,0,false);
-	    	b[6][0] = new Knight(6,0,false);
-	    	b[2][7] = new Bishop(2,7,true);
-	    	b[5][7] = new Bishop(5,7,true);
-	    	b[2][0] = new Bishop(2,0,false);
-	    	b[5][0] = new Bishop(5,0,false);
-	    	b[3][7] = new Queen(3,7,true);
-	    	b[3][0] = new Queen(3,0,false);
-	    	b[4][7] = new King(4,7,true);
-	    	b[4][0] = new King(4,0,false);	
+	    	pieceMap[0][7] = new Rook(0,7,true);
+	    	pieceMap[7][7] = new Rook(7,7,true);
+	    	pieceMap[0][0] = new Rook(0,0,false);
+	    	pieceMap[7][0] = new Rook(7,0,false);
+	    	pieceMap[1][7] = new Knight(1,7,true);
+	    	pieceMap[6][7] = new Knight(6,7,true);
+	    	pieceMap[1][0] = new Knight(1,0,false);
+	    	pieceMap[6][0] = new Knight(6,0,false);
+	    	pieceMap[2][7] = new Bishop(2,7,true);
+	    	pieceMap[5][7] = new Bishop(5,7,true);
+	    	pieceMap[2][0] = new Bishop(2,0,false);
+	    	pieceMap[5][0] = new Bishop(5,0,false);
+	    	pieceMap[3][7] = new Queen(3,7,true);
+	    	pieceMap[3][0] = new Queen(3,0,false);
+	    	pieceMap[4][7] = new King(4,7,true);
+	    	pieceMap[4][0] = new King(4,0,false);	
 		// Create JFrame window
 		JFrame window = new JFrame();
 	    	window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -169,47 +178,47 @@ public class Chess{
 	    		getPieceTarget();
 	    	
 	    		// Check if piece can move to that spot
-	    		while(!b[x1][y1].canMove(x2,y2,b)){
+	    		while(!pieceMap[x1][y1].canMove(x2,y2,pieceMap)){
 	    			System.out.println("Invalid move");
 	    			getPieceSource();
 	    			getPieceTarget();
 	    		}
 	    	
 	    		// Move the pieces in the array
-	    		b[x2][y2] = b[x1][y1];
-	    		b[x1][y1] = null;
+	    		pieceMap[x2][y2] = pieceMap[x1][y1];
+	    		pieceMap[x1][y1] = null;
 	    	
 	    		// Update position on board
-	    		b[x2][y2].move(x2,y2);
+	    		pieceMap[x2][y2].move(x2,y2);
 	    	
 	    		//SPECIAL CASE WHEN KING IS CASTLING, need to update rook
 	    		//For white king castling queen side
-	    		if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 2 && y2 == 7){
-	    			b[3][7] = b[0][7];
-	    			b[0][7] = null;
-	    			b[3][7].move(0,7);
+	    		if(pieceMap[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 2 && y2 == 7){
+	    			pieceMap[3][7] = pieceMap[0][7];
+	    			pieceMap[0][7] = null;
+	    			pieceMap[3][7].move(0,7);
 	    		}
 	    		//For white king castling king side
-	    		if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 6 && y2 == 7){
-	    			b[5][7] = b[7][7];
-	    			b[7][7] = null;
-	    			b[5][7].move(7,7);
+	    		if(pieceMap[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 6 && y2 == 7){
+	    			pieceMap[5][7] = pieceMap[7][7];
+	    			pieceMap[7][7] = null;
+	    			pieceMap[5][7].move(7,7);
 	    		}
 	    		//For black king castling queen side
-	    		if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 2 && y2 == 0){
-	    			b[3][0] = b[0][0];
-	    			b[0][0] = null;
-	    			b[3][0].move(0,0);
+	    		if(pieceMap[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 2 && y2 == 0){
+	    			pieceMap[3][0] = pieceMap[0][0];
+	    			pieceMap[0][0] = null;
+	    			pieceMap[3][0].move(0,0);
 	    		}
 	    		//For black king castling king side
-	    		if(b[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 6 && y2 == 0){
-	    			b[5][0] = b[7][0];
-	    			b[7][0] = null;
-	    			b[5][0].move(7,0);
+	    		if(pieceMap[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 6 && y2 == 0){
+	    			pieceMap[5][0] = pieceMap[7][0];
+	    			pieceMap[7][0] = null;
+	    			pieceMap[5][0].move(7,0);
 	    		}
 	    	
 			// Repaint the board
-			board.editBoard(b);
+			board.editBoard(pieceMap);
 		    	window.repaint();
 		    
 		    	// Next player's turn
