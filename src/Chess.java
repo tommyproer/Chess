@@ -1,67 +1,66 @@
 package src;
 
 import java.util.Scanner;
+import java.util.Map;
+import com.google.common.collect.ImmutableMap;
 
 import javax.swing.JFrame;
 
 import config.Config;
 
+//TODO: Add ANT to automate building
 //TODO: Make code a lot clearer and separate out calls even more, add logic of board in separate class or in config
 //TODO: Also make a Builder for pieces
 public class Chess{
 
 	private final Scanner scan = new Scanner(System.in);
 	private final Piece[][] pieceMap = new Piece[Config.BOARD_SIZE][Config.BOARD_SIZE];
-	private Board board = new Board(pieceMap);
-	//private JFrame window;
-	private boolean whiteMove;
-	public int x1,x2,y1,y2;
+	private final Board board = new Board(pieceMap);
 	
-	private String getInput()
-	{
+	private boolean whiteMove;
+	private int sourceX,sourceY,targetX,targetY;
+	private static Map<Character, Integer> charPositionToInt = new ImmutableMap.Builder<Character, Integer>()
+		.put('a', 0)
+		.put('b', 1)
+		.put('c', 2)
+		.put('d', 3)
+		.put('e', 4)
+		.put('f', 5)
+		.put('g', 6)
+		.put('h', 7)
+		.build();
+	
+	private String getInput() {
 		return scan.nextLine();
 	}
 	
-	// Convert the board position to the number in the array
-	private int convertToInt(char c){
-		if(c == 'a')
-			return 0;
-		if(c == 'b')
-			return 1;
-		if(c == 'c')
-			return 2;
-		if(c == 'd')
-			return 3;
-		if(c == 'e')
-			return 4;
-		if(c == 'f')
-			return 5;
-		if(c == 'g')
-			return 6;
-		if(c == 'h')
-			return 7;
+	private int getIntFromCharPosition(char charPosition){
+		try{
+			return charPositionToInt.get(Character.toLowerCase(charPosition));
+		}catch(NullPointerException e){
+			System.out.println(String.format("Invalid position %c.", charPosition));
+		}
 		return -1;
 	}
 	
 	// Checks if the first input is valid
 	private boolean checkInput(String input, boolean whiteMove){
 		if(input.length() != 2){
-			System.out.println("Invalid position(length of position is not 2)");
+			System.out.println("Invalid input, inappropiate length.");
 			return false;
 		}
-		if(convertToInt(input.charAt(0)) == -1){
-			System.out.println("Invalid position");
+		if(getIntFromCharPosition(input.charAt(0)) == -1){
 			return false;
 		}
 		if(Character.getNumericValue(input.charAt(1)) > 8 || Character.getNumericValue(input.charAt(1)) < 1){
-			System.out.println("Invalid positon");
+			System.out.println(String.format("Invalid positon %d", input.charAt(1)));
 			return false;
 		}
-		if(pieceMap[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))] == null){
+		if(pieceMap[getIntFromCharPosition(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))] == null){
 			System.out.println("No piece located at " + input.charAt(0) + input.charAt(1));
 			return false;
 		}
-		if(pieceMap[convertToInt(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))].getColor() != whiteMove){
+		if(pieceMap[getIntFromCharPosition(input.charAt(0))][8 - Character.getNumericValue(input.charAt(1))].getColor() != whiteMove){
 			System.out.print("Please select a ");
 			if(whiteMove)
 				System.out.println("white piece to move");
@@ -78,7 +77,7 @@ public class Chess{
 			System.out.println("Invalid position(length of position is not 2)");
 			return false;
 		}
-		if(convertToInt(input.charAt(0)) == -1){
+		if(getIntFromCharPosition(input.charAt(0)) == -1){
 			System.out.println("Invalid position");
 			return false;
 		}
@@ -104,8 +103,8 @@ public class Chess{
     		}
     	
     		// Convert position to coordinates in array
-    		x1 = convertToInt(input.charAt(0));
-    		y1 = 8 - Character.getNumericValue(input.charAt(1));
+    		sourceX = getIntFromCharPosition(input.charAt(0));
+    		targetX = 8 - Character.getNumericValue(input.charAt(1));
 	}
 	
 	// The user will enter in the second input, the position of where they want the piece to go to
@@ -118,8 +117,8 @@ public class Chess{
     		}
     	
     		// Convert position to coordinates in array
-    		x2 = convertToInt(input2.charAt(0));
-    		y2 = 8 - Character.getNumericValue(input2.charAt(1));
+    		sourceY = getIntFromCharPosition(input2.charAt(0));
+    		targetY = 8 - Character.getNumericValue(input2.charAt(1));
 	}
 
 	public void Chess(){
@@ -178,40 +177,40 @@ public class Chess{
 	    		getPieceTarget();
 	    	
 	    		// Check if piece can move to that spot
-	    		while(!pieceMap[x1][y1].canMove(x2,y2,pieceMap)){
+	    		while(!pieceMap[sourceX][targetX].canMove(sourceY,targetY,pieceMap)){
 	    			System.out.println("Invalid move");
 	    			getPieceSource();
 	    			getPieceTarget();
 	    		}
 	    	
 	    		// Move the pieces in the array
-	    		pieceMap[x2][y2] = pieceMap[x1][y1];
-	    		pieceMap[x1][y1] = null;
+	    		pieceMap[sourceY][targetY] = pieceMap[sourceX][targetX];
+	    		pieceMap[sourceX][targetX] = null;
 	    	
 	    		// Update position on board
-	    		pieceMap[x2][y2].move(x2,y2);
+	    		pieceMap[sourceY][targetY].move(sourceY,targetY);
 	    	
 	    		//SPECIAL CASE WHEN KING IS CASTLING, need to update rook
 	    		//For white king castling queen side
-	    		if(pieceMap[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 2 && y2 == 7){
+	    		if(pieceMap[sourceY][targetY].getPieceName() == "King" && sourceX == 4 && targetX == 7 && sourceY == 2 && targetY == 7){
 	    			pieceMap[3][7] = pieceMap[0][7];
 	    			pieceMap[0][7] = null;
 	    			pieceMap[3][7].move(0,7);
 	    		}
 	    		//For white king castling king side
-	    		if(pieceMap[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 7 && x2 == 6 && y2 == 7){
+	    		if(pieceMap[sourceY][targetY].getPieceName() == "King" && sourceX == 4 && targetX == 7 && sourceY == 6 && targetY == 7){
 	    			pieceMap[5][7] = pieceMap[7][7];
 	    			pieceMap[7][7] = null;
 	    			pieceMap[5][7].move(7,7);
 	    		}
 	    		//For black king castling queen side
-	    		if(pieceMap[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 2 && y2 == 0){
+	    		if(pieceMap[sourceY][targetY].getPieceName() == "King" && sourceX == 4 && targetX == 0 && sourceY == 2 && targetY == 0){
 	    			pieceMap[3][0] = pieceMap[0][0];
 	    			pieceMap[0][0] = null;
 	    			pieceMap[3][0].move(0,0);
 	    		}
 	    		//For black king castling king side
-	    		if(pieceMap[x2][y2].getPieceName() == "King" && x1 == 4 && y1 == 0 && x2 == 6 && y2 == 0){
+	    		if(pieceMap[sourceY][targetY].getPieceName() == "King" && sourceX == 4 && targetX == 0 && sourceY == 6 && targetY == 0){
 	    			pieceMap[5][0] = pieceMap[7][0];
 	    			pieceMap[7][0] = null;
 	    			pieceMap[5][0].move(7,0);

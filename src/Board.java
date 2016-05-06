@@ -12,9 +12,8 @@ import config.Config;
 public class Board extends JComponent {
 	
 	public Graphics g;
-	Piece[][] board = new Piece[8][8];		// Will store the pieces in the array
-	
-	// Initialize all the piece images into variables
+	Piece[][] board = new Piece[8][8];
+
 	Image blank = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "blank.jpg");
 	Image whitePawn = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "white_pawn.jpg");
 	Image whiteRook = Toolkit.getDefaultToolkit().getImage(Config.MAIN_PATH + "white_rook.jpg");
