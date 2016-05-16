@@ -1,4 +1,4 @@
-package src;
+package src.game.run;
 
 public class Run{
 

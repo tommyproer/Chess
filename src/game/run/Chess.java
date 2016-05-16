@@ -1,4 +1,12 @@
-package src;
+package src.game.run;
+
+import src.game.piece.Piece;
+import src.game.piece.Rook;
+import src.game.piece.Queen;
+import src.game.piece.Knight;
+import src.game.piece.Bishop;
+import src.game.piece.Pawn;
+import src.game.piece.King;
 
 import java.util.Scanner;
 import java.util.Map;

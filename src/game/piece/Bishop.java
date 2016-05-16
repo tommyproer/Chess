@@ -1,4 +1,4 @@
-package src;
+package src.game.piece;
 
 public class Bishop implements Piece {
 	//Store the positions
